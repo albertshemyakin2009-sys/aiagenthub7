@@ -1,3 +1,16 @@
+
+function translateNode(el, key, dict) {
+  if (!key || !dict) return;
+  const t = dict[key];
+  if (!t) return;
+  if (el.placeholder !== undefined && el.hasAttribute("data-i18n-plh")) {
+    el.placeholder = t;
+  } else if (el.tagName === "OPTION") {
+    el.textContent = t;
+  } else {
+    el.innerHTML = t;
+  }
+}
 // --- Mock agents with detailed info ---
 const AGENTS = [
   {
@@ -253,21 +266,33 @@ function getCurrentLang() {
   }
 }
 
-function setCurrentLang(lang) {
+function setCurrentLang(lang){
   try {
     localStorage.setItem("aiagenthub_lang", lang);
-  } catch {}
+  try { document.documentElement.setAttribute("lang", lang); } catch {}
+} catch {}
 }
 
 function applyTranslations() {
   const lang = getCurrentLang();
-  const dict = I18N[lang] || I18N.ru;
-  document.querySelectorAll("[data-i18n]").forEach((el) => {
+  const dict = (I18N && I18N[lang]) ? I18N[lang] : null;
+  const all = document.querySelectorAll("[data-i18n]");
+  all.forEach(el => {
     const key = el.getAttribute("data-i18n");
-    if (!key || !dict[key]) return;
-    if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
-      el.placeholder = dict[key];
-    } else {
+    translateNode(el, key, dict);
+  });
+  const placeholders = document.querySelectorAll("[data-i18n-plh]");
+  placeholders.forEach(el => {
+    const key = el.getAttribute("data-i18n-plh");
+    translateNode(el, key, dict);
+  });
+  // Translate <option> as well
+  const optionEls = document.querySelectorAll("option[data-i18n]");
+  optionEls.forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    translateNode(el, key, dict);
+  });
+} else {
       el.innerHTML = dict[key];
     }
   });
@@ -653,3 +678,34 @@ document.addEventListener("DOMContentLoaded", () => {
   // Apply translations last
   applyTranslations();
 });
+
+// Single-open toggle for agent cards
+function closeAllAgentCards(except) {
+  document.querySelectorAll(".agent-card.expanded").forEach((card) => {
+    if (except && card === except) return;
+    card.classList.remove("expanded");
+  });
+}
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-role='agent-more']");
+  if (!btn) return;
+  const card = e.target.closest(".agent-card");
+  if (!card) return;
+  const willOpen = !card.classList.contains("expanded");
+  closeAllAgentCards(card);
+  if (willOpen) card.classList.add("expanded");
+});
+
+function hydrateI18NThemeLabels(){
+  if(!I18N) return;
+  if(!I18N.en) I18N.en = {};
+  I18N.en.theme_original = I18N.en.theme_original || "Original";
+  I18N.en.theme_light = I18N.en.theme_light || "Light";
+  I18N.en.theme_blue = I18N.en.theme_blue || "Dark Blue";
+  if(!I18N.ru) I18N.ru = {};
+  I18N.ru.theme_original = I18N.ru.theme_original || "Оригинальная";
+  I18N.ru.theme_light = I18N.ru.theme_light || "Светлая";
+  I18N.ru.theme_blue = I18N.ru.theme_blue || "Тёмно‑синяя";
+}
+document.addEventListener("DOMContentLoaded", hydrateI18NThemeLabels);
