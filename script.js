@@ -248,7 +248,7 @@ const I18N = {
 function getCurrentLang() {
   try {
     return localStorage.getItem("aiagenthub_lang") || "ru";
-  } catch {
+  } catch {} {
     return "ru";
   }
 }
@@ -288,9 +288,6 @@ function getCurrentTheme() {
     if (v && ["original","light","blue"].includes(v)) return v;
   } catch {}
   return "original";
-} catch {
-    return "original";
-  }
 }
 
 function setCurrentTheme(theme) {
@@ -301,8 +298,8 @@ function setCurrentTheme(theme) {
   body.setAttribute("data-theme", theme);
   try {
     localStorage.setItem("aiagenthub_theme", theme);
-  } catch {}
-} catch {}
+  }
+ catch {}
 }
 
 // --- Auth state (demo only) ---
@@ -310,7 +307,7 @@ function getDemoUser() {
   try {
     const raw = localStorage.getItem("aiagenthub_user");
     return raw ? JSON.parse(raw) : null;
-  } catch {
+  } catch {} {
     return null;
   }
 }
@@ -332,7 +329,7 @@ function setGuest() {
 function isGuest() {
   try {
     return localStorage.getItem("aiagenthub_guest") === "1";
-  } catch {
+  } catch {} {
     return false;
   }
 }
