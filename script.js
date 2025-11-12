@@ -283,8 +283,10 @@ function applyTranslations() {
 
 // --- Theme helpers ---
 function getCurrentTheme() {
-  try {
-    return localStorage.getItem("aiagenthub_theme") || "original";
+  try { return localStorage.getItem("aiagenthub_theme") || "original"; }
+  catch (e) { return "original"; }
+}
+
   } catch {
     return "original";
   }
@@ -296,7 +298,20 @@ function setCurrentTheme(theme) {
   const allowed = ["original","light","darkblue"];
   if (!allowed.includes(theme)) theme = "original";
   body.setAttribute("data-theme", theme === "original" ? "original" : theme);
-  try { localStorage.setItem("aiagenthub_theme", theme); } catch {}
+  try { localStorage.setItem("aiagenthub_theme", theme); } catch (e) {}
+  // swap mockup if present
+  const img = document.getElementById("theme-mockup");
+  if (img) {
+    const map = {
+      "original": "assets/mockup-orange.svg",
+      "light": "assets/mockup-light.svg",
+      "darkblue": "assets/mockup-darkblue.svg"
+    };
+    img.src = map[theme] || map["original"];
+    img.alt = "Макбук • тема: " + theme;
+  }
+}
+catch {}
   // swap mockup if present
   const img = document.getElementById("theme-mockup");
   if (img) {
@@ -661,4 +676,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Apply translations last
   applyTranslations();
+});
+
+// SAFETY THEME INIT
+document.addEventListener("DOMContentLoaded", function(){
+  try {
+    var sel = document.getElementById("themeSelect");
+    if (!sel) { setCurrentTheme(getCurrentTheme()); }
+  } catch(e){ /* noop */ }
+});
+
+
+// SAFETY REVEAL
+document.addEventListener("DOMContentLoaded", function(){
+  try {
+    document.querySelectorAll(".fade-in").forEach(function(el){ el.classList.add("visible"); });
+  } catch(e){ /* noop */ }
 });
