@@ -1,4 +1,22 @@
 
+// --- NAV GUARD: allow native navigation for internal .html links ---
+document.addEventListener("click", function(e){
+  try {
+    const a = e.target.closest("a[href]");
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    const isInternal = /\.html($|[?#])/i.test(href) && !/^https?:/i.test(href);
+    const hasModifier = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
+    if (isInternal && !hasModifier) {
+      // Let browser handle it; stop other handlers from blocking.
+      e.stopImmediatePropagation();
+      // Do not call preventDefault here; allow native nav.
+      return;
+    }
+  } catch {}
+}, true); // capture phase to run before others
+
+
 function translateNode(el, key, dict) {
   if (!key || !dict) return;
   const t = dict[key];
@@ -709,3 +727,37 @@ function hydrateI18NThemeLabels(){
   I18N.ru.theme_blue = I18N.ru.theme_blue || "Тёмно‑синяя";
 }
 document.addEventListener("DOMContentLoaded", hydrateI18NThemeLabels);
+
+
+// --- UX: smooth scroll for hash anchors
+document.addEventListener("click", (e) => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const id = a.getAttribute("href").slice(1);
+  const el = document.getElementById(id);
+  if (!el) return;
+  e.preventDefault();
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+// --- UX: auto-close mobile menu after click
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("nav a");
+  if (!a) return;
+  const mobileNav = document.getElementById("mobileNav");
+  if (mobileNav && mobileNav.classList.contains("open")) {
+    mobileNav.classList.remove("open");
+  }
+});
+
+
+function updateThemeColorMeta(){
+  try{
+    const m = document.querySelector('meta[name="theme-color"]');
+    const body = document.body;
+    if(!m || !body) return;
+    const bg = getComputedStyle(body).getPropertyValue('--bg-elevated').trim() || '#000000';
+    m.setAttribute('content', bg);
+  }catch(e){}
+}
+document.addEventListener("DOMContentLoaded", updateThemeColorMeta);
