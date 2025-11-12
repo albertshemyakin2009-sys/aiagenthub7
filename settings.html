@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Agent Hub — Настройки</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand"><span class="dot"></span> AI Agent Hub</div>
+      <nav class="row">
+        <a class="btn" href="index.html">Главная</a>
+        <a class="btn" href="catalog.html">Агенты</a>
+        <a class="btn" href="about.html">О проекте</a>
+        <a class="btn" href="support.html">Поддержка</a>
+        <a class="btn" href="requests.html">Пожелания</a>
+        <a class="btn" href="settings.html">Настройки</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Настройки</h1>
+    <form class="settings-form" onsubmit="event.preventDefault()">
+      <fieldset>
+        <legend>Тема</legend>
+        <div class="row">
+          <label><input type="radio" name="theme" value="default"> Оранжево‑чёрная (по умолчанию)</label>
+          <label><input type="radio" name="theme" value="darkblue"> Тёмно‑синяя</label>
+          <label><input type="radio" name="theme" value="light"> Светлая</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Язык и валюта</legend>
+        <div class="row">
+          <label>Язык&nbsp;
+            <select id="lang">
+              <option value="ru">RU</option>
+              <option value="en">EN</option>
+              <option value="tr">TR</option>
+            </select>
+          </label>
+          <label>Валюта&nbsp;
+            <select id="currency">
+              <option>RUB</option>
+              <option>USD</option>
+              <option>EUR</option>
+              <option>KZT</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+      <div class="row">
+        <button id="resetSettings" type="button" class="button-ghost">Сбросить</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row" style="justify-content:space-between">
+        <small class="muted">© 2025 AI Agent Hub</small>
+        <small class="muted">Язык: <span data-bind="lang"></span> • Валюта: <span data-bind="currency"></span></small>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

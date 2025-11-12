@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Админ-панель — AIAGENTHUB (демо)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app-shell">
+
+<header class="app-header">
+  <div class="max-w app-header-inner">
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <div class="brand-text">AIAGENTHUB</div>
+    </div>
+    <nav class="nav">
+      <a href="index.html" data-i18n="nav_home" class="">Главная</a>
+      <a href="catalog.html" data-i18n="nav_catalog" class="">Каталог</a>
+      <a href="about.html" data-i18n="nav_about" class="">О нас</a>
+      <a href="support.html" data-i18n="nav_support" class="">Поддержка</a>
+      <a href="requests.html" data-i18n="nav_requests" class="">Запросы</a>
+      <a href="settings.html" data-i18n="nav_settings" class="">Настройки</a>
+      <a href="admin.html" data-i18n="nav_admin" class="active">Админ</a>
+    </nav>
+    <div class="header-right">
+      <button id="langBtn" class="lang-toggle" type="button">
+        <span data-i18n="lang_label">RU</span>
+      </button>
+      <button class="header-auth-btn" id="openAuthFromHeader" type="button">
+        <span class="dot"></span>
+        <span data-i18n="auth_demo">Демо-доступ</span>
+      </button>
+    </div>
+    <div class="burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+      <a href="index.html" data-i18n="nav_home" class="">Главная</a>
+      <a href="catalog.html" data-i18n="nav_catalog" class="">Каталог</a>
+      <a href="about.html" data-i18n="nav_about" class="">О нас</a>
+      <a href="support.html" data-i18n="nav_support" class="">Поддержка</a>
+      <a href="requests.html" data-i18n="nav_requests" class="">Запросы</a>
+      <a href="settings.html" data-i18n="nav_settings" class="">Настройки</a>
+      <a href="admin.html" data-i18n="nav_admin" class="active">Админ</a>
+  </nav>
+</header>
+
+  <main>
+    <section class="section fade-in">
+      <div class="max-w">
+        <h1 class="page-title" data-i18n="admin_title">Админ-панель (демо)</h1>
+        <p class="page-subtitle" data-i18n="admin_subtitle">
+          Прототип интерфейса модерации агентов. Здесь можно будет управлять заявками, статусами и фичерингом.
+        </p>
+        <div class="columns">
+          <div class="card">
+            <h3 data-i18n="admin_metrics_title">Сводка за сегодня</h3>
+            <ul class="list">
+              <li>Опубликовано агентов: <strong>18</strong></li>
+              <li>На модерации: <strong>7</strong></li>
+              <li>Заявки на фичеринг: <strong>4</strong></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 data-i18n="admin_actions_title">Действия модератора</h3>
+            <ul class="list">
+              <li>Проверка карточек и описаний агентов.</li>
+              <li>Включение / выключение видимости в каталоге.</li>
+              <li>Отметка агентов как featured для главной.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card" style="margin-top:14px;">
+          <h3 data-i18n="admin_table_title">Агенты (демо-таблица)</h3>
+          <table class="table" id="adminAgentsTable">
+            <thead>
+              <tr>
+                <th>Название</th>
+                <th>Категория</th>
+                <th>Статус</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<footer class="app-footer">
+  <div class="max-w">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-title" data-i18n="footer_product">Продукт</div>
+        <a href="catalog.html" class="footer-link" data-i18n="footer_catalog">Каталог агентов</a>
+        <a href="about.html" class="footer-link" data-i18n="footer_how_it_works">Как это работает</a>
+      </div>
+      <div>
+        <div class="footer-title" data-i18n="footer_company">Компания</div>
+        <a href="about.html" class="footer-link" data-i18n="footer_about">О платформе</a>
+        <a href="requests.html" class="footer-link" data-i18n="footer_contact">Запросы и партнёрство</a>
+      </div>
+      <div>
+        <div class="footer-title" data-i18n="footer_support">Поддержка</div>
+        <a href="support.html" class="footer-link" data-i18n="footer_faq">FAQ</a>
+        <a href="support.html" class="footer-link" data-i18n="footer_support_center">Центр помощи</a>
+      </div>
+      <div>
+        <div class="footer-title">Legal</div>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="#" class="footer-link">Privacy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© AIAGENTHUB, 2025. All rights reserved.</div>
+      <div data-i18n="footer_tagline">Каталог умных AI-агентов для бизнеса и создателей.</div>
+    </div>
+  </div>
+</footer>
+
+
+<div class="modal-backdrop" id="authModal">
+  <div class="modal">
+    <button class="modal-close" id="authClose">×</button>
+    <h3 class="modal-title" data-i18n="auth_title">Вход / регистрация</h3>
+    <div class="modal-subtitle" data-i18n="auth_subtitle">
+      Зарегистрируйтесь, чтобы подключать агентов и отправлять заявки. Можно продолжить как гость.
+    </div>
+    <div class="modal-tabs">
+      <div class="modal-tab active" id="tabRegister" data-i18n="auth_tab_register">Регистрация</div>
+      <div class="modal-tab" id="tabLogin" data-i18n="auth_tab_login">Вход</div>
+    </div>
+    <form id="authForm" class="form-grid">
+      <div>
+        <div class="label" data-i18n="auth_name_label">Имя / команда</div>
+        <input class="input" type="text" id="authName" placeholder="AI Studio" />
+      </div>
+      <div>
+        <div class="label">Email</div>
+        <input class="input" type="email" id="authEmail" placeholder="you@product.io" required />
+      </div>
+      <div>
+        <div class="label" data-i18n="auth_password_label">Пароль</div>
+        <input class="input" type="password" id="authPassword" placeholder="Минимум 6 символов" required />
+      </div>
+    </form>
+    <div class="modal-actions">
+      <button class="modal-btn-primary" id="authSubmit" data-i18n="auth_submit">Продолжить (демо)</button>
+      <button class="modal-btn-ghost" id="authSkip" data-i18n="auth_skip">Продолжить как гость</button>
+    </div>
+    <div class="modal-subtitle" style="margin-top:4px;font-size:8px;" data-i18n="auth_notice">
+      В продакшене здесь будет безопасная регистрация через backend / OAuth. Сейчас — прототип.
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>

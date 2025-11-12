@@ -1,0 +1,95 @@
+:root {
+  --bg: #0b0b0b;
+  --text: #f6f6f6;
+  --muted: #9aa0a6;
+  --brand: #ff6a00;
+  --brand-contrast: #111111;
+  --card: #151515;
+  --card-border: rgba(255,255,255,0.08);
+  --accent-grad: linear-gradient(135deg, #ff6a00 0%, #151515 100%);
+}
+:root[data-theme="darkblue"]{
+  --bg: #0b1630;
+  --text: #e8ecf7;
+  --muted: #9bb0d1;
+  --brand: #2d66ff;
+  --brand-contrast: #0a1226;
+  --card: #0f1e3d;
+  --card-border: rgba(255,255,255,0.1);
+  --accent-grad: linear-gradient(135deg, #1a3db5 0%, #0b1630 100%);
+}
+:root[data-theme="light"]{
+  --bg: #f7f9fc;
+  --text: #0e1a2b;
+  --muted: #5b6b84;
+  --brand: #ff7e3d;
+  --brand-contrast: #ffffff;
+  --card: #ffffff;
+  --card-border: rgba(9,30,66,0.12);
+  --accent-grad: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+a { color: var(--brand); text-decoration: none; }
+.container { max-width: 1120px; margin: 0 auto; padding: 24px; }
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(6px);
+  background: color-mix(in oklab, var(--bg) 85%, transparent);
+  border-bottom: 1px solid var(--card-border);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; }
+.brand { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px; }
+.brand .dot{ width:10px; height:10px; border-radius:999px; background: var(--brand); box-shadow:0 0 12px var(--brand); }
+.nav a.btn, .btn {
+  display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px;
+  border:1px solid var(--card-border); background:var(--card); color:var(--text);
+}
+.hero {
+  background: var(--accent-grad);
+  padding: 56px 24px; border-bottom:1px solid var(--card-border);
+}
+.hero h1 { margin:0 0 8px; font-size: clamp(28px, 5vw, 44px); }
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.card {
+  border:1px solid var(--card-border);
+  background: var(--card);
+  border-radius:16px; padding:16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+.card h3 { margin: 0 0 6px; }
+.badge { background: var(--brand); color: var(--brand-contrast); padding:2px 8px; border-radius:999px; font-weight:700; font-size:12px; }
+.footer { border-top:1px solid var(--card-border); padding:24px; color: var(--muted); }
+small.muted { color: var(--muted); }
+
+/* Accordion for agents */
+.agent { overflow: hidden; transition: grid-template-rows 300ms ease; border:1px solid var(--card-border); border-radius:16px; background: var(--card); }
+.agent-header { display:flex; align-items:center; justify-content:space-between; padding:16px; cursor:pointer; }
+.agent-content-wrap { grid-template-rows: 0fr; display:grid; transition: grid-template-rows 300ms ease; }
+.agent.open .agent-content-wrap { grid-template-rows: 1fr; }
+.agent-content { min-height:0; overflow:hidden; }
+.agent-content-inner { padding: 0 16px 16px 16px; border-top:1px dashed var(--card-border); }
+
+/* Buttons */
+.button-primary { background: var(--brand); color: var(--brand-contrast); border:none; padding:10px 14px; border-radius:12px; cursor:pointer; }
+.button-ghost { background: transparent; border:1px solid var(--card-border); padding:10px 14px; border-radius:12px; color:var(--text); cursor:pointer; }
+
+/* MacBook mockup container (about.html) */
+.mockup-wrap { display:flex; align-items:flex-end; justify-content:center; padding:24px; border-top:1px solid var(--card-border); margin-top:32px; }
+.mockup { max-width:720px; width:100%; border: 10px solid #444; border-bottom-width: 20px; border-radius: 12px; background:#111; }
+.mockup img { display:block; width:100%; height:auto; }
+
+/* Settings form */
+.settings-form { display:grid; gap:20px; max-width:680px; }
+.row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+select, input[type="radio"]{ accent-color: var(--brand); }
+fieldset { border:1px solid var(--card-border); border-radius:16px; padding:16px; }
+legend { padding:0 8px; color: var(--muted); }
