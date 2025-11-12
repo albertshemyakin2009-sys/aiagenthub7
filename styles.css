@@ -1,29 +1,24 @@
 :root {
-  /* Original (dark) theme as base */
-  --bg-main: #020817;
-  --bg-elevated: #050b1e;
-  --bg-soft: #0b1220;
-  --bg-body-gradient: radial-gradient(circle at top left, #111827 0, #020817 42%, #000 100%);
+  /* Original (orange-black) theme as base (DEFAULT) */
+  --bg-main: #0b0b0c;
+  --bg-elevated: #121214;
+  --bg-soft: #0f0f12;
+  --bg-body-gradient: radial-gradient(1200px 600px at -10% -20%, #fb923c22 0%, transparent 40%),
+                      radial-gradient(900px 500px at 120% -10%, #f9731622 0%, transparent 48%),
+                      linear-gradient(180deg, #0b0b0c 0%, #000000 100%);
 
-  --accent: #2563eb;
-  --accent-soft: rgba(37,99,235,0.12);
-  --accent-soft-2: rgba(37,99,235,0.04);
+  --accent: #f97316;
+  --accent-soft: rgba(249,115,22,0.14);
+  --accent-soft-2: rgba(249,115,22,0.06);
 
-  --border-subtle: rgba(148,163,253,0.16);
+  --border-subtle: rgba(255,255,255,0.08);
 
-  --text-main: #e5e7eb;
-  --text-soft: #9ca3af;
-  --text-mute: #6b7280;
+  --text-main: #f3f4f6;
+  --text-soft: #c4c7ce;
+  --text-mute: #9aa0a6;
 
-  --radius-xl: 22px;
-  --radius-lg: 18px;
-  --radius-md: 14px;
-
-  --transition-fast: 0.2s ease;
-  --shadow-soft: 0 18px 70px rgba(15,23,42,0.88);
-  --shadow-soft-sm: 0 10px 40px rgba(15,23,42,0.7);
-
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, -system-ui, sans-serif;
+  --shadow-soft: 0 18px 40px rgba(0,0,0,0.35);
+  --shadow-soft-sm: 0 10px 24px rgba(0,0,0,0.25);
 }
 
 /* Light theme overrides */
@@ -1225,4 +1220,34 @@ body[data-theme="light"] .mockup-pill {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+
+/* Blue theme extracted from previous :root */
+[data-theme="blue"] {
+  /* Original (dark) theme as base */
+  --bg-main: #020817;
+  --bg-elevated: #050b1e;
+  --bg-soft: #0b1220;
+  --bg-body-gradient: radial-gradient(circle at top left, #111827 0, #020817 42%, #000 100%);
+
+  --accent: #2563eb;
+  --accent-soft: rgba(37,99,235,0.12);
+  --accent-soft-2: rgba(37,99,235,0.04);
+
+  --border-subtle: rgba(148,163,253,0.16);
+
+  --text-main: #e5e7eb;
+  --text-soft: #9ca3af;
+  --text-mute: #6b7280;
+
+  --radius-xl: 22px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+
+  --transition-fast: 0.2s ease;
+  --shadow-soft: 0 18px 70px rgba(15,23,42,0.88);
+  --shadow-soft-sm: 0 10px 40px rgba(15,23,42,0.7);
+
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, -system-ui, sans-serif;
 }

@@ -282,26 +282,27 @@ function applyTranslations() {
 }
 
 // --- Theme helpers ---
-function getCurrentTheme(){ try { return localStorage.getItem("aiagenthub_theme") || "original"; } catch(e){ return "original"; } } catch {
+function getCurrentTheme() {
+  try {
+    const v = localStorage.getItem("aiagenthub_theme");
+    if (v && ["original","light","blue"].includes(v)) return v;
+  } catch {}
+  return "original";
+} catch {
     return "original";
   }
 }
 
-function setCurrentTheme(theme){
+function setCurrentTheme(theme) {
   const body = document.body;
   if (!body) return;
-  const allowed = ["original","light","darkblue"];
-  if (!allowed.includes(theme)) theme = "original";
-  body.setAttribute("data-theme", theme === "original" ? "original" : theme);
-  try { localStorage.setItem("aiagenthub_theme", theme); } catch(e){}
-  const img = document.getElementById("theme-mockup");
-  if (img){
-    const map = {"original":"assets/mockup-orange.svg","light":"assets/mockup-light.svg","darkblue":"assets/mockup-darkblue.svg"};
-    img.src = map[theme] || map["original"];
-    img.alt = "Макбук • тема: " + theme;
-  }
-}
-catch {}
+  const allowed = new Set(["original", "light", "blue"]);
+  if (!allowed.has(theme)) theme = "original";
+  body.setAttribute("data-theme", theme);
+  try {
+    localStorage.setItem("aiagenthub_theme", theme);
+  } catch {}
+} catch {}
 }
 
 // --- Auth state (demo only) ---
@@ -654,15 +655,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Apply translations last
   applyTranslations();
-});
-
-// SAFETY THEME INIT & REVEAL
-document.addEventListener("DOMContentLoaded", function(){
-  try {
-    var sel = document.getElementById("themeSelect");
-    if (!sel) { setCurrentTheme(getCurrentTheme()); }
-  } catch(e){}
-  try {
-    document.querySelectorAll(".fade-in").forEach(function(el){ el.classList.add("visible"); });
-  } catch(e){}
 });
