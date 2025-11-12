@@ -1,47 +1,173 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI Agent Hub — Поддержка</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <meta charset="UTF-8" />
+  <title>Техническая поддержка — AIAGENTHUB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="nav">
-    <div class="nav-inner">
-      <div class="brand"><span class="dot"></span> AI Agent Hub</div>
-      <nav class="row">
-        <a class="btn" href="index.html">Главная</a>
-        <a class="btn" href="catalog.html">Агенты</a>
-        <a class="btn" href="about.html">О проекте</a>
-        <a class="btn" href="support.html">Поддержка</a>
-        <a class="btn" href="requests.html">Пожелания</a>
-        <a class="btn" href="settings.html">Настройки</a>
-      </nav>
-    </div>
-  </header>
+<div class="app-shell">
 
-  <main class="container">
-    <h1>Поддержка</h1>
-    <p class="muted">Задайте технические вопросы, опишите проблему — мы ответим.</p>
-    <div class="card">
-      <form class="settings-form" onsubmit="event.preventDefault(); alert('Спасибо! Мы свяжемся с вами.');">
-        <label>Эл. почта<br><input type="email" required placeholder="you@example.com" style="width:100%; padding:10px"></label>
-        <label>Тема вопроса<br><input type="text" required placeholder="Краткое описание" style="width:100%; padding:10px"></label>
-        <label>Сообщение<br><textarea required rows="6" style="width:100%; padding:10px"></textarea></label>
-        <button class="button-primary" type="submit">Отправить</button>
-      </form>
+<header class="app-header">
+  <div class="max-w app-header-inner">
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <div class="brand-text">AIAGENTHUB</div>
     </div>
+    <nav class="nav">
+      <a href="index.html" data-i18n="nav_home" class="">Главная</a>
+      <a href="catalog.html" data-i18n="nav_catalog" class="">Каталог</a>
+      <a href="about.html" data-i18n="nav_about" class="">О нас</a>
+      <a href="support.html" data-i18n="nav_support" class="active">Поддержка</a>
+      <a href="requests.html" data-i18n="nav_requests" class="">Запросы</a>
+      <a href="settings.html" data-i18n="nav_settings" class="">Настройки</a>
+      <a href="admin.html" data-i18n="nav_admin" class="">Админ</a>
+    </nav>
+    <div class="header-right">
+      <button id="langBtn" class="lang-toggle" type="button">
+        <span data-i18n="lang_label">RU</span>
+      </button>
+      <button class="header-auth-btn" id="openAuthFromHeader" type="button">
+        <span class="dot"></span>
+        <span data-i18n="auth_demo">Демо-доступ</span>
+      </button>
+    </div>
+    <div class="burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+      <a href="index.html" data-i18n="nav_home" class="">Главная</a>
+      <a href="catalog.html" data-i18n="nav_catalog" class="">Каталог</a>
+      <a href="about.html" data-i18n="nav_about" class="">О нас</a>
+      <a href="support.html" data-i18n="nav_support" class="active">Поддержка</a>
+      <a href="requests.html" data-i18n="nav_requests" class="">Запросы</a>
+      <a href="settings.html" data-i18n="nav_settings" class="">Настройки</a>
+      <a href="admin.html" data-i18n="nav_admin" class="">Админ</a>
+  </nav>
+</header>
+
+  <main>
+    <section class="section fade-in">
+      <div class="max-w">
+        <h1 class="page-title" data-i18n="support_title">Техническая поддержка</h1>
+        <p class="page-subtitle" data-i18n="support_subtitle">
+          Сообщите о багах, проблемах с доступом или работе агентов. Только технические вопросы — продуктовые идеи оставляйте в разделе запросов.
+        </p>
+        <div class="columns">
+          <div class="card">
+            <h3 data-i18n="support_form_title">Форма техподдержки</h3>
+            <form id="supportForm" class="form-grid">
+              <div>
+                <div class="label" data-i18n="support_name_label">Имя / команда</div>
+                <input class="input" type="text" name="name" required placeholder="AI Studio / SaaS / Solo" />
+              </div>
+              <div>
+                <div class="label">Email</div>
+                <input class="input" type="email" name="email" required placeholder="you@product.io" />
+              </div>
+              <div>
+                <div class="label" data-i18n="support_topic_label">Тип проблемы</div>
+                <select class="select" name="topic">
+                  <option>Ошибка на сайте</option>
+                  <option>Не работает агент</option>
+                  <option>Проблема с доступом</option>
+                  <option>Другое (техническое)</option>
+                </select>
+              </div>
+              <div>
+                <div class="label" data-i18n="support_message_label">Описание</div>
+                <textarea class="textarea" name="message" required
+                  placeholder="Опишите шаги, как воспроизвести проблему."></textarea>
+              </div>
+              <button class="btn-submit" type="submit" data-i18n="support_submit">Отправить в поддержку (демо)</button>
+            </form>
+          </div>
+          <div class="card">
+            <h3 data-i18n="support_faq_title">Частые вопросы (тех)</h3>
+            <ul class="list">
+              <li>Нет доступа к сайту — проверьте VPN / браузер, затем напишите нам.</li>
+              <li>Агент не отвечает — укажите название агента и время инцидента.</li>
+              <li>Проблема с формами — приложите скриншот и текст ошибки.</li>
+            </ul>
+            <p style="margin-top:6px;font-size:9px;color:#6b7280;">
+              В продакшене обращения улетают в ваш helpdesk или issue-трекер.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="row" style="justify-content:space-between">
-        <small class="muted">© 2025 AI Agent Hub</small>
-        <small class="muted">Язык: <span data-bind="lang"></span> • Валюта: <span data-bind="currency"></span></small>
+<footer class="app-footer">
+  <div class="max-w">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-title" data-i18n="footer_product">Продукт</div>
+        <a href="catalog.html" class="footer-link" data-i18n="footer_catalog">Каталог агентов</a>
+        <a href="about.html" class="footer-link" data-i18n="footer_how_it_works">Как это работает</a>
+      </div>
+      <div>
+        <div class="footer-title" data-i18n="footer_company">Компания</div>
+        <a href="about.html" class="footer-link" data-i18n="footer_about">О платформе</a>
+        <a href="requests.html" class="footer-link" data-i18n="footer_contact">Запросы и партнёрство</a>
+      </div>
+      <div>
+        <div class="footer-title" data-i18n="footer_support">Поддержка</div>
+        <a href="support.html" class="footer-link" data-i18n="footer_faq">FAQ</a>
+        <a href="support.html" class="footer-link" data-i18n="footer_support_center">Центр помощи</a>
+      </div>
+      <div>
+        <div class="footer-title">Legal</div>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="#" class="footer-link">Privacy</a>
       </div>
     </div>
-  </footer>
-  <script src="assets/js/app.js"></script>
+    <div class="footer-bottom">
+      <div>© AIAGENTHUB, 2025. All rights reserved.</div>
+      <div data-i18n="footer_tagline">Каталог умных AI-агентов для бизнеса и создателей.</div>
+    </div>
+  </div>
+</footer>
+
+
+<div class="modal-backdrop" id="authModal">
+  <div class="modal">
+    <button class="modal-close" id="authClose">×</button>
+    <h3 class="modal-title" data-i18n="auth_title">Вход / регистрация</h3>
+    <div class="modal-subtitle" data-i18n="auth_subtitle">
+      Зарегистрируйтесь, чтобы подключать агентов и отправлять заявки. Можно продолжить как гость.
+    </div>
+    <div class="modal-tabs">
+      <div class="modal-tab active" id="tabRegister" data-i18n="auth_tab_register">Регистрация</div>
+      <div class="modal-tab" id="tabLogin" data-i18n="auth_tab_login">Вход</div>
+    </div>
+    <form id="authForm" class="form-grid">
+      <div>
+        <div class="label" data-i18n="auth_name_label">Имя / команда</div>
+        <input class="input" type="text" id="authName" placeholder="AI Studio" />
+      </div>
+      <div>
+        <div class="label">Email</div>
+        <input class="input" type="email" id="authEmail" placeholder="you@product.io" required />
+      </div>
+      <div>
+        <div class="label" data-i18n="auth_password_label">Пароль</div>
+        <input class="input" type="password" id="authPassword" placeholder="Минимум 6 символов" required />
+      </div>
+    </form>
+    <div class="modal-actions">
+      <button class="modal-btn-primary" id="authSubmit" data-i18n="auth_submit">Продолжить (демо)</button>
+      <button class="modal-btn-ghost" id="authSkip" data-i18n="auth_skip">Продолжить как гость</button>
+    </div>
+    <div class="modal-subtitle" style="margin-top:4px;font-size:8px;" data-i18n="auth_notice">
+      В продакшене здесь будет безопасная регистрация через backend / OAuth. Сейчас — прототип.
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="script.js"></script>
 </body>
 </html>

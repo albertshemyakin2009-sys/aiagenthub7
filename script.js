@@ -293,11 +293,22 @@ function getCurrentTheme() {
 function setCurrentTheme(theme) {
   const body = document.body;
   if (!body) return;
-  if (theme !== "light" && theme !== "original") theme = "original";
-  body.setAttribute("data-theme", theme === "light" ? "light" : "original");
-  try {
-    localStorage.setItem("aiagenthub_theme", theme);
-  } catch {}
+  const allowed = ["original","light","darkblue"];
+  if (!allowed.includes(theme)) theme = "original";
+  body.setAttribute("data-theme", theme === "original" ? "original" : theme);
+  try { localStorage.setItem("aiagenthub_theme", theme); } catch {}
+  // swap mockup if present
+  const img = document.getElementById("theme-mockup");
+  if (img) {
+    const map = {
+      "original": "assets/mockup-orange.svg",
+      "light": "assets/mockup-light.svg",
+      "darkblue": "assets/mockup-darkblue.svg"
+    };
+    img.src = map[theme] || map["original"];
+    img.alt = "Макбук • тема: " + theme;
+  }
+} catch {}
 }
 
 // --- Auth state (demo only) ---

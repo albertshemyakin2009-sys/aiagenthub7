@@ -3,11 +3,11 @@
   --bg-main: #020817;
   --bg-elevated: #050b1e;
   --bg-soft: #0b1220;
-  --bg-body-gradient: radial-gradient(circle at top left, #111827 0, #020817 42%, #000 100%);
+  --bg-body-gradient: radial-gradient(circle at 10% 0%, rgba(255,106,0,0.10) 0, #0a0a0a 45%, #000 100%);
 
-  --accent: #2563eb;
-  --accent-soft: rgba(37,99,235,0.12);
-  --accent-soft-2: rgba(37,99,235,0.04);
+  --accent: #ff6a00;
+  --accent-soft: rgba(255,106,0,0.15);
+  --accent-soft-2: rgba(255,106,0,0.06);
 
   --border-subtle: rgba(148,163,253,0.16);
 
@@ -28,14 +28,20 @@
 
 /* Light theme overrides */
 body[data-theme="light"] {
+  /* updated light theme with gentle gradient & warm accent */
+  --accent: #ff7e3d;
+  --accent-soft: rgba(255,126,61,0.12);
+  --accent-soft-2: rgba(255,126,61,0.05);
+  --bg-body-gradient: radial-gradient(circle at top left, #f8fafc 0, #f3f4f6 38%, #eef2ff 100%);
+
   --bg-main: #f4f5f8;
   --bg-elevated: #ffffff;
   --bg-soft: #e5e7eb;
-  --bg-body-gradient: radial-gradient(circle at top left, #e5e7eb 0, #f9fafb 40%, #f4f5f8 100%);
+  --bg-body-gradient: radial-gradient(circle at 10% 0%, rgba(255,106,0,0.10) 0, #0a0a0a 45%, #000 100%);
 
-  --accent: #2563eb;
-  --accent-soft: rgba(37,99,235,0.10);
-  --accent-soft-2: rgba(37,99,235,0.03);
+  --accent: #ff6a00;
+  --accent-soft: rgba(255,106,0,0.15);
+  --accent-soft-2: rgba(255,106,0,0.06);
 
   --border-subtle: #d1d5db;
 
@@ -1226,3 +1232,33 @@ body[data-theme="light"] .mockup-pill {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+
+/* Dark Blue theme overrides */
+[data-theme="darkblue"] {
+  --bg-main: #0b1630;
+  --bg-elevated: #0f1e3d;
+  --bg-soft: #0b1430;
+  --bg-body-gradient: radial-gradient(circle at 0 0, rgba(45,102,255,0.16), #0b1630 45%, #060b1a 100%);
+
+  --accent: #2d66ff;
+  --accent-soft: rgba(45,102,255,0.18);
+  --accent-soft-2: rgba(45,102,255,0.07);
+
+  --border-subtle: rgba(255,255,255,0.10);
+
+  --text-main: #e8ecf7;
+  --text-soft: #aab7d7;
+  --text-mute: #90a2c4;
+
+  --shadow-soft: 0 18px 70px rgba(6,11,26,0.9);
+  --shadow-soft-sm: 0 10px 40px rgba(6,11,26,0.7);
+}
+/* Mockup tweaks per theme */
+[data-theme="darkblue"] .mockup { border-color: rgba(255,255,255,0.1); background:#0c1939; }
+[data-theme="light"] .mockup { border-color: rgba(9,30,66,0.12); background:#fff; }
+
+/* Mockup preview section (about.html) */
+.mockup-wrap { display:flex; justify-content:center; padding:28px 0; border-top:1px solid var(--border-subtle); margin-top:32px; }
+.mockup { max-width:840px; width:100%; border: 10px solid #3a3a3a; border-bottom-width:18px; border-radius:14px; background:#111; box-shadow: var(--shadow-soft-sm); }
+.mockup img { display:block; width:100%; height:auto; border-radius:6px; }

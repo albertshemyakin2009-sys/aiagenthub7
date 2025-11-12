@@ -1,67 +1,186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI Agent Hub — Главная</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <meta charset="UTF-8" />
+  <title>AIAGENTHUB — Каталог AI-агентов</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="nav">
-    <div class="nav-inner">
-      <div class="brand"><span class="dot"></span> AI Agent Hub</div>
-      <nav class="row">
-        <a class="btn" href="index.html">Главная</a>
-        <a class="btn" href="catalog.html">Агенты</a>
-        <a class="btn" href="about.html">О проекте</a>
-        <a class="btn" href="support.html">Поддержка</a>
-        <a class="btn" href="requests.html">Пожелания</a>
-        <a class="btn" href="settings.html">Настройки</a>
-      </nav>
-    </div>
-  </header>
+<div class="app-shell">
 
-  <section class="hero">
-    <div class="container">
-      <span class="badge">Оранжево‑чёрная тема — по умолчанию</span>
-      <h1>Готовые AI‑агенты для бизнеса и создателей</h1>
-      <p>Каталог готовых агентов, удобные настройки тем, языка и валюты. Лёгкий старт — дальше только результаты.</p>
-      <div class="row" style="gap:12px; margin-top:12px">
-        <a class="btn" href="catalog.html">Смотреть агентов</a>
-        <button class="button-primary" id="openSignup" title="Регистрация пока не реализована">Регистрация</button>
-      </div>
+<header class="app-header">
+  <div class="max-w app-header-inner">
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <div class="brand-text">AIAGENTHUB</div>
     </div>
-  </section>
-  <main class="container" style="padding-top:28px">
-    <div class="grid">
-      <div class="card">
-        <h3>Темы</h3>
-        <p>Моментальное переключение между тёмно‑синей, светлой и фирменной оранжево‑чёрной темой.</p>
-      </div>
-      <div class="card">
-        <h3>Каталог агентов</h3>
-        <p>Карточки с разворотом по клику «Показать больше», открыта только одна.</p>
-      </div>
-      <div class="card">
-        <h3>Поддержка и запросы</h3>
-        <p>Отдельные страницы для вопросов, партнёрства и предложений.</p>
-      </div>
+    <nav class="nav">
+      <a href="index.html" data-i18n="nav_home" class="active">Главная</a>
+      <a href="catalog.html" data-i18n="nav_catalog" class="">Каталог</a>
+      <a href="about.html" data-i18n="nav_about" class="">О нас</a>
+      <a href="support.html" data-i18n="nav_support" class="">Поддержка</a>
+      <a href="requests.html" data-i18n="nav_requests" class="">Запросы</a>
+      <a href="settings.html" data-i18n="nav_settings" class="">Настройки</a>
+      <a href="admin.html" data-i18n="nav_admin" class="">Админ</a>
+    </nav>
+    <div class="header-right">
+      <button id="langBtn" class="lang-toggle" type="button">
+        <span data-i18n="lang_label">RU</span>
+      </button>
+      <button class="header-auth-btn" id="openAuthFromHeader" type="button">
+        <span class="dot"></span>
+        <span data-i18n="auth_demo">Демо-доступ</span>
+      </button>
     </div>
+    <div class="burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+      <a href="index.html" data-i18n="nav_home" class="active">Главная</a>
+      <a href="catalog.html" data-i18n="nav_catalog" class="">Каталог</a>
+      <a href="about.html" data-i18n="nav_about" class="">О нас</a>
+      <a href="support.html" data-i18n="nav_support" class="">Поддержка</a>
+      <a href="requests.html" data-i18n="nav_requests" class="">Запросы</a>
+      <a href="settings.html" data-i18n="nav_settings" class="">Настройки</a>
+      <a href="admin.html" data-i18n="nav_admin" class="">Админ</a>
+  </nav>
+</header>
+
+  <main>
+    <section class="hero fade-in">
+      <div class="max-w hero-grid">
+        <div>
+          <div class="hero-kicker">
+            <span>beta</span>
+            <span class="label" data-i18n="hero_kicker">Маркетплейс готовых AI-агентов</span>
+          </div>
+          <h1 class="hero-title" data-i18n="hero_title">
+            Находи и подключай <span>умных AI-агентов</span> за минуты
+          </h1>
+          <p class="hero-subtitle" data-i18n="hero_subtitle">
+            AIAGENTHUB помогает бизнесу, студиям и создателям быстро тестировать и внедрять готовых AI-ассистентов без боли с инфраструктурой.
+          </p>
+          <div class="hero-actions">
+            <a href="catalog.html" class="btn-primary" data-i18n="hero_cta_primary">
+              Смотреть каталог
+            </a>
+            <a href="requests.html" class="btn-ghost" data-i18n="hero_cta_secondary">
+              Добавить своего агента
+            </a>
+          </div>
+        </div>
+        <aside class="hero-panel">
+          <div class="hero-panel-label">
+            <span data-i18n="hero_panel_title">Live-панель агентов</span>
+            <span class="badge" data-i18n="hero_panel_badge">curated / verified*</span>
+          </div>
+          <div class="hero-agents" id="heroAgents"></div>
+          <div class="hero-progress">
+            <div data-i18n="hero_panel_stats">
+              40+ демо-агентов • категории: Support, Sales, Marketing, DevTools
+            </div>
+            <div class="hero-progress-bar">
+              <div class="hero-progress-fill"></div>
+            </div>
+            <div class="hero-trend" data-i18n="hero_panel_note">
+              *Верификация и рейтинги — ключевой фокус развития платформы.
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section fade-in">
+      <div class="max-w">
+        <div class="section-header">
+          <div>
+            <div class="section-title" data-i18n="section_popular_title">Популярные направления</div>
+            <div class="section-subtitle" data-i18n="section_popular_subtitle">
+              Подборка агентов, которые чаще всего тестируют SaaS-проекты, агентства и продакты.
+            </div>
+          </div>
+          <div class="chips">
+            <div class="chip">Support 24/7</div>
+            <div class="chip">Sales Outreach</div>
+            <div class="chip">Content &amp; SEO</div>
+            <div class="chip">Automation</div>
+          </div>
+        </div>
+        <div class="agents-grid" id="featuredAgents"></div>
+      </div>
+    </section>
   </main>
-  <dialog id="signupModal" class="card" style="max-width:520px">
-    <h3 style="margin:0 0 8px">Регистрация</h3>
-    <p class="muted">Функция будет доступна позже. Сейчас вы можете просмотреть каталог и настройки.</p>
-    <div class="row" style="justify-content:flex-end"><button id="closeSignup" class="button-ghost">Закрыть</button></div>
-  </dialog>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="row" style="justify-content:space-between">
-        <small class="muted">© 2025 AI Agent Hub</small>
-        <small class="muted">Язык: <span data-bind="lang"></span> • Валюта: <span data-bind="currency"></span></small>
+<footer class="app-footer">
+  <div class="max-w">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-title" data-i18n="footer_product">Продукт</div>
+        <a href="catalog.html" class="footer-link" data-i18n="footer_catalog">Каталог агентов</a>
+        <a href="about.html" class="footer-link" data-i18n="footer_how_it_works">Как это работает</a>
+      </div>
+      <div>
+        <div class="footer-title" data-i18n="footer_company">Компания</div>
+        <a href="about.html" class="footer-link" data-i18n="footer_about">О платформе</a>
+        <a href="requests.html" class="footer-link" data-i18n="footer_contact">Запросы и партнёрство</a>
+      </div>
+      <div>
+        <div class="footer-title" data-i18n="footer_support">Поддержка</div>
+        <a href="support.html" class="footer-link" data-i18n="footer_faq">FAQ</a>
+        <a href="support.html" class="footer-link" data-i18n="footer_support_center">Центр помощи</a>
+      </div>
+      <div>
+        <div class="footer-title">Legal</div>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="#" class="footer-link">Privacy</a>
       </div>
     </div>
-  </footer>
-  <script src="assets/js/app.js"></script>
+    <div class="footer-bottom">
+      <div>© AIAGENTHUB, 2025. All rights reserved.</div>
+      <div data-i18n="footer_tagline">Каталог умных AI-агентов для бизнеса и создателей.</div>
+    </div>
+  </div>
+</footer>
+
+
+<div class="modal-backdrop" id="authModal">
+  <div class="modal">
+    <button class="modal-close" id="authClose">×</button>
+    <h3 class="modal-title" data-i18n="auth_title">Вход / регистрация</h3>
+    <div class="modal-subtitle" data-i18n="auth_subtitle">
+      Зарегистрируйтесь, чтобы подключать агентов и отправлять заявки. Можно продолжить как гость.
+    </div>
+    <div class="modal-tabs">
+      <div class="modal-tab active" id="tabRegister" data-i18n="auth_tab_register">Регистрация</div>
+      <div class="modal-tab" id="tabLogin" data-i18n="auth_tab_login">Вход</div>
+    </div>
+    <form id="authForm" class="form-grid">
+      <div>
+        <div class="label" data-i18n="auth_name_label">Имя / команда</div>
+        <input class="input" type="text" id="authName" placeholder="AI Studio" />
+      </div>
+      <div>
+        <div class="label">Email</div>
+        <input class="input" type="email" id="authEmail" placeholder="you@product.io" required />
+      </div>
+      <div>
+        <div class="label" data-i18n="auth_password_label">Пароль</div>
+        <input class="input" type="password" id="authPassword" placeholder="Минимум 6 символов" required />
+      </div>
+    </form>
+    <div class="modal-actions">
+      <button class="modal-btn-primary" id="authSubmit" data-i18n="auth_submit">Продолжить (демо)</button>
+      <button class="modal-btn-ghost" id="authSkip" data-i18n="auth_skip">Продолжить как гость</button>
+    </div>
+    <div class="modal-subtitle" style="margin-top:4px;font-size:8px;" data-i18n="auth_notice">
+      В продакшене здесь будет безопасная регистрация через backend / OAuth. Сейчас — прототип.
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="script.js"></script>
 </body>
 </html>
