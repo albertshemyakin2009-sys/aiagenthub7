@@ -1,34 +1,3 @@
-
-// --- NAV GUARD: allow native navigation for internal .html links ---
-document.addEventListener("click", function(e){
-  try {
-    const a = e.target.closest("a[href]");
-    if (!a) return;
-    const href = a.getAttribute("href") || "";
-    const isInternal = /\.html($|[?#])/i.test(href) && !/^https?:/i.test(href);
-    const hasModifier = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
-    if (isInternal && !hasModifier) {
-      // Let browser handle it; stop other handlers from blocking.
-      e.stopImmediatePropagation();
-      // Do not call preventDefault here; allow native nav.
-      return;
-    }
-  } catch {}
-}, true); // capture phase to run before others
-
-
-function translateNode(el, key, dict) {
-  if (!key || !dict) return;
-  const t = dict[key];
-  if (!t) return;
-  if (el.placeholder !== undefined && el.hasAttribute("data-i18n-plh")) {
-    el.placeholder = t;
-  } else if (el.tagName === "OPTION") {
-    el.textContent = t;
-  } else {
-    el.innerHTML = t;
-  }
-}
 // --- Mock agents with detailed info ---
 const AGENTS = [
   {
@@ -119,6 +88,7 @@ const AGENTS = [
 
 // --- i18n dictionary (ключевые тексты) ---
 const I18N = {
+  // Russian translations
   ru: {
     lang_label: "RU",
     auth_demo: "Демо-доступ",
@@ -195,7 +165,35 @@ const I18N = {
     auth_submit: "Продолжить (демо)",
     auth_skip: "Продолжить как гость",
     auth_notice: "В продакшене здесь будет безопасная регистрация через backend / OAuth. Сейчас — прототип."
+    ,
+    // Labels for dynamic agent cards and misc
+    agent_more: "Подробнее",
+    agent_less: "Свернуть",
+    agent_connect: "Подключить",
+    card_use_case_label: "Use case:",
+    card_example_prompt_label: "Пример запроса:",
+    card_integrations_label: "Интеграции:",
+    card_pricing_note_label: "Условия:",
+    not_found: "Ничего не найдено под ваш запрос. Попробуйте изменить фильтры.",
+    // Additional About section items
+    about_for_whom_1: "Бизнес и стартапы — быстрый тест AI‑решений под реальные метрики.",
+    about_for_whom_2: "Разработчики и студии — витрина агентов и канал платящих лидов.",
+    about_for_whom_3: "Создатели контента и эксперты — упаковка экспертизы в AI‑ассистента.",
+    about_quality_1: "Базовая модерация карточек агентов и сценариев.",
+    about_quality_2: "Планы: рейтинги, верификация, публичные ревью, песочницы для теста.",
+    about_quality_3: "Прозрачные описания: стек, ограничения, стоимость, интеграции.",
+    about_next_1: "Единый формат подключения и оплаты.",
+    about_next_2: "Смарт‑адаптация агентов под кейс и данные клиента.",
+    about_next_3: "Инструменты аналитики эффективности агентов.",
+    support_message_label: "Описание",
+    settings_theme_title: "Тема сайта",
+    settings_reset: "Сбросить настройки"
+    ,
+    // About mockup translations
+    mockup_label: "Мокап платформы",
+    mockup_screen_title: "Главная страница платформы"
   },
+  // English translations
   en: {
     lang_label: "EN",
     auth_demo: "Demo access",
@@ -272,6 +270,33 @@ const I18N = {
     auth_submit: "Continue (demo)",
     auth_skip: "Continue as guest",
     auth_notice: "Production version will use secure backend / OAuth. This is a prototype."
+    ,
+    // Labels for dynamic agent cards and misc
+    agent_more: "More",
+    agent_less: "Collapse",
+    agent_connect: "Connect",
+    card_use_case_label: "Use case:",
+    card_example_prompt_label: "Example request:",
+    card_integrations_label: "Integrations:",
+    card_pricing_note_label: "Pricing:",
+    not_found: "Nothing found for your query. Try adjusting filters.",
+    // Additional About section items
+    about_for_whom_1: "Businesses and startups – quick AI solution testing tied to real metrics.",
+    about_for_whom_2: "Developers and studios – a storefront for agents and a source of paying leads.",
+    about_for_whom_3: "Content creators and experts – packaging expertise into an AI assistant.",
+    about_quality_1: "Baseline moderation of agent cards and scenarios.",
+    about_quality_2: "Roadmap: ratings, verification, public reviews, testing sandboxes.",
+    about_quality_3: "Transparent descriptions: stack, limitations, pricing, integrations.",
+    about_next_1: "Unified connection and billing format.",
+    about_next_2: "Smart adaptation of agents to the client’s case and data.",
+    about_next_3: "Agent effectiveness analytics tools.",
+    support_message_label: "Description",
+    settings_theme_title: "Site theme",
+    settings_reset: "Reset settings"
+    ,
+    // About mockup translations
+    mockup_label: "Platform mockup",
+    mockup_screen_title: "Homepage preview"
   }
 };
 
@@ -279,38 +304,26 @@ const I18N = {
 function getCurrentLang() {
   try {
     return localStorage.getItem("aiagenthub_lang") || "ru";
-  } catch {} {
+  } catch {
     return "ru";
   }
 }
 
-function setCurrentLang(lang){
+function setCurrentLang(lang) {
   try {
     localStorage.setItem("aiagenthub_lang", lang);
-  try { document.documentElement.setAttribute("lang", lang); } catch {}
-} catch {}
+  } catch {}
 }
 
 function applyTranslations() {
   const lang = getCurrentLang();
-  const dict = (I18N && I18N[lang]) ? I18N[lang] : null;
-  const all = document.querySelectorAll("[data-i18n]");
-  all.forEach(el => {
+  const dict = I18N[lang] || I18N.ru;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
-    translateNode(el, key, dict);
-  });
-  const placeholders = document.querySelectorAll("[data-i18n-plh]");
-  placeholders.forEach(el => {
-    const key = el.getAttribute("data-i18n-plh");
-    translateNode(el, key, dict);
-  });
-  // Translate <option> as well
-  const optionEls = document.querySelectorAll("option[data-i18n]");
-  optionEls.forEach(el => {
-    const key = el.getAttribute("data-i18n");
-    translateNode(el, key, dict);
-  });
-} else {
+    if (!key || !dict[key]) return;
+    if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+      el.placeholder = dict[key];
+    } else {
       el.innerHTML = dict[key];
     }
   });
@@ -327,22 +340,22 @@ function applyTranslations() {
 // --- Theme helpers ---
 function getCurrentTheme() {
   try {
-    const v = localStorage.getItem("aiagenthub_theme");
-    if (v && ["original","light","blue"].includes(v)) return v;
-  } catch {}
-  return "original";
+    return localStorage.getItem("aiagenthub_theme") || "original";
+  } catch {
+    return "original";
+  }
 }
 
 function setCurrentTheme(theme) {
   const body = document.body;
   if (!body) return;
-  const allowed = new Set(["original", "light", "blue"]);
-  if (!allowed.has(theme)) theme = "original";
+  // Support three themes: original, blue and light. Fall back to original when unknown.
+  if (!["light", "original", "blue"].includes(theme)) theme = "original";
+  // Set a data-theme attribute directly to the theme name for CSS selectors
   body.setAttribute("data-theme", theme);
   try {
     localStorage.setItem("aiagenthub_theme", theme);
-  }
- catch {}
+  } catch {}
 }
 
 // --- Auth state (demo only) ---
@@ -350,7 +363,7 @@ function getDemoUser() {
   try {
     const raw = localStorage.getItem("aiagenthub_user");
     return raw ? JSON.parse(raw) : null;
-  } catch {} {
+  } catch {
     return null;
   }
 }
@@ -372,7 +385,7 @@ function setGuest() {
 function isGuest() {
   try {
     return localStorage.getItem("aiagenthub_guest") === "1";
-  } catch {} {
+  } catch {
     return false;
   }
 }
@@ -394,6 +407,8 @@ function closeAuthModal() {
 
 // --- Agent card template ---
 function agentCardHTML(a) {
+  // Use the current language dictionary for labels on dynamic cards
+  const dict = I18N[getCurrentLang()] || I18N.ru;
   return `
     <article class="agent-card" data-agent-id="${a.id}">
       <div class="agent-card-header">
@@ -408,17 +423,17 @@ function agentCardHTML(a) {
       </div>
       <div class="agent-actions">
         <button class="primary connect-btn" type="button">
-          <span>Подключить</span>
+          <span>${dict.agent_connect || 'Connect'}</span>
         </button>
         <button class="more-btn" type="button">
-          <span>Подробнее</span>
+          <span>${dict.agent_more || 'More'}</span>
         </button>
       </div>
       <div class="agent-more" style="display:none;">
-        <div><strong>Use case:</strong> ${a.useCase}</div>
-        <div><strong>Пример запроса:</strong> ${a.examplePrompt}</div>
-        <div><strong>Интеграции:</strong> ${a.integrations.join(", ")}</div>
-        <div><strong>Условия:</strong> ${a.pricingNote}</div>
+        <div><strong>${dict.card_use_case_label || 'Use case:'}</strong> ${a.useCase}</div>
+        <div><strong>${dict.card_example_prompt_label || 'Example request:'}</strong> ${a.examplePrompt}</div>
+        <div><strong>${dict.card_integrations_label || 'Integrations:'}</strong> ${a.integrations.join(", ")}</div>
+        <div><strong>${dict.card_pricing_note_label || 'Pricing:'}</strong> ${a.pricingNote}</div>
       </div>
     </article>
   `;
@@ -446,6 +461,28 @@ document.addEventListener("DOMContentLoaded", () => {
       const next = getCurrentLang() === "ru" ? "en" : "ru";
       setCurrentLang(next);
       applyTranslations();
+      // re-render dynamic content using new language
+      // hero panel and featured cards
+      if (heroAgentsContainer) {
+        const featured = AGENTS.filter((a) => a.featured).slice(0, 4);
+        heroAgentsContainer.innerHTML = featured.map((a) => `
+          <div class="hero-agent-card">
+            <strong>${a.name}</strong>
+            <div class="agent-desc">${a.short}</div>
+            <div class="hero-agent-meta">
+              <span>${a.category}</span>
+              <div style="font-size:8px;color:#22c55e;">↑ live</div>
+            </div>
+          </div>
+        `).join("");
+      }
+      if (featuredGrid) {
+        const feats = AGENTS.filter((a) => a.featured);
+        featuredGrid.innerHTML = feats.map(agentCardHTML).join("");
+      }
+      if (catalogGrid) {
+        renderCatalog();
+      }
     });
   }
 
@@ -563,6 +600,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Settings reset: clear localStorage and restore defaults
+  const settingsResetBtn = document.getElementById("settingsResetBtn");
+  if (settingsResetBtn) {
+    settingsResetBtn.addEventListener("click", () => {
+      try {
+        localStorage.removeItem("aiagenthub_theme");
+        localStorage.removeItem("aiagenthub_lang");
+        localStorage.removeItem("aiagenthub_user");
+        localStorage.removeItem("aiagenthub_guest");
+        localStorage.removeItem("aiagenthub_auth_shown");
+      } catch {}
+      // Reset to defaults and reload page for clarity
+      setCurrentTheme("original");
+      setCurrentLang("ru");
+      alert("Настройки сброшены. Страница будет перезагружена.");
+      location.reload();
+    });
+  }
+
   // Render hero agents
   const heroAgentsContainer = document.getElementById("heroAgents");
   if (heroAgentsContainer) {
@@ -604,9 +660,13 @@ document.addEventListener("DOMContentLoaded", () => {
       return matchesCategory && matchesQuery;
     });
 
-    catalogGrid.innerHTML = filtered.length
-      ? filtered.map(agentCardHTML).join("")
-      : '<div style="font-size:11px;color:#6b7280;">Ничего не найдено под ваш запрос. Попробуйте изменить фильтры.</div>';
+    if (filtered.length) {
+      catalogGrid.innerHTML = filtered.map(agentCardHTML).join("");
+    } else {
+      const dict = I18N[getCurrentLang()] || I18N.ru;
+      const msg = dict.not_found || 'Nothing found for your query. Try adjusting filters.';
+      catalogGrid.innerHTML = `<div style="font-size:11px;color:#6b7280;">${msg}</div>`;
+    }
   }
 
   if (filterChips.length && catalogGrid) {
@@ -660,10 +720,28 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!card) return;
       const more = card.querySelector(".agent-more");
       if (!more) return;
+      const dict = I18N[getCurrentLang()] || I18N.ru;
       const isOpen = more.style.display === "block";
-      more.style.display = isOpen ? "none" : "block";
-      const span = moreBtn.querySelector("span");
-      if (span) span.textContent = isOpen ? "Подробнее" : "Свернуть";
+      // If opening, collapse all other cards and reset their button labels
+      if (!isOpen) {
+        document.querySelectorAll(".agent-card").forEach((c) => {
+          const m = c.querySelector(".agent-more");
+          if (m && m !== more) {
+            m.style.display = "none";
+          }
+        });
+        document.querySelectorAll(".more-btn span").forEach((s) => {
+          s.textContent = dict.agent_more || 'More';
+        });
+        more.style.display = "block";
+        const span = moreBtn.querySelector("span");
+        if (span) span.textContent = dict.agent_less || 'Collapse';
+      } else {
+        // Closing current
+        more.style.display = "none";
+        const span = moreBtn.querySelector("span");
+        if (span) span.textContent = dict.agent_more || 'More';
+      }
     }
 
     const connectBtn = e.target.closest(".connect-btn");
@@ -694,70 +772,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Apply translations last
+  // Show auth modal on first visit if not authed or guest (demo)
+  if (!isAuthedOrGuest()) {
+    try {
+      const shown = localStorage.getItem("aiagenthub_auth_shown");
+      if (!shown) {
+        openAuthModal();
+        localStorage.setItem("aiagenthub_auth_shown", "1");
+      }
+    } catch {}
+  }
+
   applyTranslations();
 });
-
-// Single-open toggle for agent cards
-function closeAllAgentCards(except) {
-  document.querySelectorAll(".agent-card.expanded").forEach((card) => {
-    if (except && card === except) return;
-    card.classList.remove("expanded");
-  });
-}
-
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest("[data-role='agent-more']");
-  if (!btn) return;
-  const card = e.target.closest(".agent-card");
-  if (!card) return;
-  const willOpen = !card.classList.contains("expanded");
-  closeAllAgentCards(card);
-  if (willOpen) card.classList.add("expanded");
-});
-
-function hydrateI18NThemeLabels(){
-  if(!I18N) return;
-  if(!I18N.en) I18N.en = {};
-  I18N.en.theme_original = I18N.en.theme_original || "Original";
-  I18N.en.theme_light = I18N.en.theme_light || "Light";
-  I18N.en.theme_blue = I18N.en.theme_blue || "Dark Blue";
-  if(!I18N.ru) I18N.ru = {};
-  I18N.ru.theme_original = I18N.ru.theme_original || "Оригинальная";
-  I18N.ru.theme_light = I18N.ru.theme_light || "Светлая";
-  I18N.ru.theme_blue = I18N.ru.theme_blue || "Тёмно‑синяя";
-}
-document.addEventListener("DOMContentLoaded", hydrateI18NThemeLabels);
-
-
-// --- UX: smooth scroll for hash anchors
-document.addEventListener("click", (e) => {
-  const a = e.target.closest('a[href^="#"]');
-  if (!a) return;
-  const id = a.getAttribute("href").slice(1);
-  const el = document.getElementById(id);
-  if (!el) return;
-  e.preventDefault();
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
-});
-
-// --- UX: auto-close mobile menu after click
-document.addEventListener("click", (e) => {
-  const a = e.target.closest("nav a");
-  if (!a) return;
-  const mobileNav = document.getElementById("mobileNav");
-  if (mobileNav && mobileNav.classList.contains("open")) {
-    mobileNav.classList.remove("open");
-  }
-});
-
-
-function updateThemeColorMeta(){
-  try{
-    const m = document.querySelector('meta[name="theme-color"]');
-    const body = document.body;
-    if(!m || !body) return;
-    const bg = getComputedStyle(body).getPropertyValue('--bg-elevated').trim() || '#000000';
-    m.setAttribute('content', bg);
-  }catch(e){}
-}
-document.addEventListener("DOMContentLoaded", updateThemeColorMeta);

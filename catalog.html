@@ -1,138 +1,144 @@
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
-<meta charset="utf-8"/>
-<title>Каталог AI-агентов — AIAGENTHUB</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="styles.css" rel="stylesheet"/>
-<link href="manifest.webmanifest" rel="manifest"/><meta content="#000000" name="theme-color"/></head>
+  <meta charset="UTF-8" />
+  <title>Каталог AI-агентов — AIAGENTHUB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
 <body>
 <div class="app-shell">
+
 <header class="app-header">
-<div class="max-w app-header-inner">
-<div class="brand">
-<div class="brand-logo"></div>
-<div class="brand-text">AIAGENTHUB</div>
-</div>
-<nav class="nav">
-<a class="" data-i18n="nav_home" href="index.html">Главная</a>
-<a class="active" data-i18n="nav_catalog" href="catalog.html">Каталог</a>
-<a class="" data-i18n="nav_about" href="about.html">О нас</a>
-<a class="" data-i18n="nav_support" href="support.html">Поддержка</a>
-<a class="" data-i18n="nav_requests" href="requests.html">Запросы</a>
-<a class="" data-i18n="nav_settings" href="settings.html">Настройки</a>
-<a class="" data-i18n="nav_admin" href="admin.html">Админ</a>
-</nav>
-<div class="header-right">
-<button class="lang-toggle" id="langBtn" type="button">
-<span data-i18n="lang_label">RU</span>
-</button>
-<button class="header-auth-btn" id="openAuthFromHeader" type="button">
-<span class="dot"></span>
-<span data-i18n="auth_demo">Демо-доступ</span>
-</button>
-</div>
-<div class="burger" id="burger">
-<span></span><span></span><span></span>
-</div>
-</div>
-<nav class="mobile-nav" id="mobileNav">
-<a class="" data-i18n="nav_home" href="index.html">Главная</a>
-<a class="active" data-i18n="nav_catalog" href="catalog.html">Каталог</a>
-<a class="" data-i18n="nav_about" href="about.html">О нас</a>
-<a class="" data-i18n="nav_support" href="support.html">Поддержка</a>
-<a class="" data-i18n="nav_requests" href="requests.html">Запросы</a>
-<a class="" data-i18n="nav_settings" href="settings.html">Настройки</a>
-<a class="" data-i18n="nav_admin" href="admin.html">Админ</a>
-</nav>
+  <div class="max-w app-header-inner">
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <div class="brand-text">AIAGENTHUB</div>
+    </div>
+    <nav class="nav">
+      <a href="index.html" data-i18n="nav_home" class="">Главная</a>
+      <a href="catalog.html" data-i18n="nav_catalog" class="active">Каталог</a>
+      <a href="about.html" data-i18n="nav_about" class="">О нас</a>
+      <a href="support.html" data-i18n="nav_support" class="">Поддержка</a>
+      <a href="requests.html" data-i18n="nav_requests" class="">Запросы</a>
+      <a href="settings.html" data-i18n="nav_settings" class="">Настройки</a>
+      <a href="admin.html" data-i18n="nav_admin" class="">Админ</a>
+    </nav>
+    <div class="header-right">
+      <button id="langBtn" class="lang-toggle" type="button">
+        <span data-i18n="lang_label">RU</span>
+      </button>
+      <button class="header-auth-btn" id="openAuthFromHeader" type="button">
+        <span class="dot"></span>
+        <span data-i18n="auth_demo">Демо-доступ</span>
+      </button>
+    </div>
+    <div class="burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+      <a href="index.html" data-i18n="nav_home" class="">Главная</a>
+      <a href="catalog.html" data-i18n="nav_catalog" class="active">Каталог</a>
+      <a href="about.html" data-i18n="nav_about" class="">О нас</a>
+      <a href="support.html" data-i18n="nav_support" class="">Поддержка</a>
+      <a href="requests.html" data-i18n="nav_requests" class="">Запросы</a>
+      <a href="settings.html" data-i18n="nav_settings" class="">Настройки</a>
+      <a href="admin.html" data-i18n="nav_admin" class="">Админ</a>
+  </nav>
 </header>
-<main>
-<section class="section fade-in">
-<div class="max-w">
-<h1 class="page-title" data-i18n="catalog_title">Каталог AI-агентов</h1>
-<p class="page-subtitle" data-i18n="catalog_subtitle">
+
+  <main>
+    <section class="section fade-in">
+      <div class="max-w">
+        <h1 class="page-title" data-i18n="catalog_title">Каталог AI-агентов</h1>
+        <p class="page-subtitle" data-i18n="catalog_subtitle">
           Исследуй готовых ассистентов для поддержки клиентов, продаж, маркетинга, разработки и внутренних операций.
         </p>
-<div class="search-bar">
-<input class="search-input" id="searchInput" placeholder="Поиск по названию, нише или стеку..." type="search"/>
-</div>
-<div class="filter-chips" id="filterChips">
-<div class="filter-chip active" data-category="all" data-i18n="filter_all">Все категории</div>
-<div class="filter-chip" data-category="Support">Support</div>
-<div class="filter-chip" data-category="Sales">Sales</div>
-<div class="filter-chip" data-category="Marketing">Marketing</div>
-<div class="filter-chip" data-category="DevTools">DevTools</div>
-<div class="filter-chip" data-category="Ops">Ops &amp; Automation</div>
-</div>
-<div class="agents-grid" id="catalogAgents"></div>
-</div>
-</section>
-</main>
+        <div class="search-bar">
+          <input id="searchInput" class="search-input" type="search"
+                 placeholder="Поиск по названию, нише или стеку..." />
+        </div>
+        <div class="filter-chips" id="filterChips">
+          <div class="filter-chip active" data-category="all" data-i18n="filter_all">Все категории</div>
+          <div class="filter-chip" data-category="Support">Support</div>
+          <div class="filter-chip" data-category="Sales">Sales</div>
+          <div class="filter-chip" data-category="Marketing">Marketing</div>
+          <div class="filter-chip" data-category="DevTools">DevTools</div>
+          <div class="filter-chip" data-category="Ops">Ops &amp; Automation</div>
+        </div>
+        <div class="agents-grid" id="catalogAgents"></div>
+      </div>
+    </section>
+  </main>
+
 <footer class="app-footer">
-<div class="max-w">
-<div class="footer-grid">
-<div>
-<div class="footer-title" data-i18n="footer_product">Продукт</div>
-<a class="footer-link" data-i18n="footer_catalog" href="catalog.html">Каталог агентов</a>
-<a class="footer-link" data-i18n="footer_how_it_works" href="about.html">Как это работает</a>
-</div>
-<div>
-<div class="footer-title" data-i18n="footer_company">Компания</div>
-<a class="footer-link" data-i18n="footer_about" href="about.html">О платформе</a>
-<a class="footer-link" data-i18n="footer_contact" href="requests.html">Запросы и партнёрство</a>
-</div>
-<div>
-<div class="footer-title" data-i18n="footer_support">Поддержка</div>
-<a class="footer-link" data-i18n="footer_faq" href="support.html">FAQ</a>
-<a class="footer-link" data-i18n="footer_support_center" href="support.html">Центр помощи</a>
-</div>
-<div>
-<div class="footer-title">Legal</div>
-<a class="footer-link" href="#">Terms</a>
-<a class="footer-link" href="#">Privacy</a>
-</div>
-</div>
-<div class="footer-bottom">
-<div>© AIAGENTHUB, 2025. All rights reserved.</div>
-<div data-i18n="footer_tagline">Каталог умных AI-агентов для бизнеса и создателей.</div>
-</div>
-</div>
+  <div class="max-w">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-title" data-i18n="footer_product">Продукт</div>
+        <a href="catalog.html" class="footer-link" data-i18n="footer_catalog">Каталог агентов</a>
+        <a href="about.html" class="footer-link" data-i18n="footer_how_it_works">Как это работает</a>
+      </div>
+      <div>
+        <div class="footer-title" data-i18n="footer_company">Компания</div>
+        <a href="about.html" class="footer-link" data-i18n="footer_about">О платформе</a>
+        <a href="requests.html" class="footer-link" data-i18n="footer_contact">Запросы и партнёрство</a>
+      </div>
+      <div>
+        <div class="footer-title" data-i18n="footer_support">Поддержка</div>
+        <a href="support.html" class="footer-link" data-i18n="footer_faq">FAQ</a>
+        <a href="support.html" class="footer-link" data-i18n="footer_support_center">Центр помощи</a>
+      </div>
+      <div>
+        <div class="footer-title">Legal</div>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="#" class="footer-link">Privacy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© AIAGENTHUB, 2025. All rights reserved.</div>
+      <div data-i18n="footer_tagline">Каталог умных AI-агентов для бизнеса и создателей.</div>
+    </div>
+  </div>
 </footer>
+
+
 <div class="modal-backdrop" id="authModal">
-<div class="modal">
-<button class="modal-close" id="authClose">×</button>
-<h3 class="modal-title" data-i18n="auth_title">Вход / регистрация</h3>
-<div class="modal-subtitle" data-i18n="auth_subtitle">
+  <div class="modal">
+    <button class="modal-close" id="authClose">×</button>
+    <h3 class="modal-title" data-i18n="auth_title">Вход / регистрация</h3>
+    <div class="modal-subtitle" data-i18n="auth_subtitle">
       Зарегистрируйтесь, чтобы подключать агентов и отправлять заявки. Можно продолжить как гость.
     </div>
-<div class="modal-tabs">
-<div class="modal-tab active" data-i18n="auth_tab_register" id="tabRegister">Регистрация</div>
-<div class="modal-tab" data-i18n="auth_tab_login" id="tabLogin">Вход</div>
-</div>
-<form class="form-grid" id="authForm">
-<div>
-<div class="label" data-i18n="auth_name_label">Имя / команда</div>
-<input class="input" id="authName" placeholder="AI Studio" type="text"/>
-</div>
-<div>
-<div class="label">Email</div>
-<input class="input" id="authEmail" placeholder="you@product.io" required="" type="email"/>
-</div>
-<div>
-<div class="label" data-i18n="auth_password_label">Пароль</div>
-<input class="input" id="authPassword" placeholder="Минимум 6 символов" required="" type="password"/>
-</div>
-</form>
-<div class="modal-actions">
-<button class="modal-btn-primary" data-i18n="auth_submit" id="authSubmit">Продолжить (демо)</button>
-<button class="modal-btn-ghost" data-i18n="auth_skip" id="authSkip">Продолжить как гость</button>
-</div>
-<div class="modal-subtitle" data-i18n="auth_notice" style="margin-top:4px;font-size:8px;">
+    <div class="modal-tabs">
+      <div class="modal-tab active" id="tabRegister" data-i18n="auth_tab_register">Регистрация</div>
+      <div class="modal-tab" id="tabLogin" data-i18n="auth_tab_login">Вход</div>
+    </div>
+    <form id="authForm" class="form-grid">
+      <div>
+        <div class="label" data-i18n="auth_name_label">Имя / команда</div>
+        <input class="input" type="text" id="authName" placeholder="AI Studio" />
+      </div>
+      <div>
+        <div class="label">Email</div>
+        <input class="input" type="email" id="authEmail" placeholder="you@product.io" required />
+      </div>
+      <div>
+        <div class="label" data-i18n="auth_password_label">Пароль</div>
+        <input class="input" type="password" id="authPassword" placeholder="Минимум 6 символов" required />
+      </div>
+    </form>
+    <div class="modal-actions">
+      <button class="modal-btn-primary" id="authSubmit" data-i18n="auth_submit">Продолжить (демо)</button>
+      <button class="modal-btn-ghost" id="authSkip" data-i18n="auth_skip">Продолжить как гость</button>
+    </div>
+    <div class="modal-subtitle" style="margin-top:4px;font-size:8px;" data-i18n="auth_notice">
       В продакшене здесь будет безопасная регистрация через backend / OAuth. Сейчас — прототип.
     </div>
+  </div>
 </div>
-</div>
+
 </div>
 <script src="script.js"></script>
 </body>
